@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:34:30 by gstitou           #+#    #+#             */
-/*   Updated: 2024/11/18 18:43:32 by gstitou          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:18:47 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void print(char **str, int *counter)
 {
     while (**str && !is_percent(*str))
     {
-        write(1, *str, 1);
+        (*counter) += write(1, *str, 1);
         (*str)++;
-        (*counter)++;
     }
 }
 
@@ -39,14 +38,11 @@ int ft_printf(const char *format, ...)
     while (*format)
     {
         if (!is_percent(*format))
-        print(&format, &counter);
+            print(&format, &counter);
         if (is_percent(*format))
         {
             format++;
-            if(*format == c || *format == s || *format == p ||*format == d ||*format == i ||*format == u ||*format == x ||*format == X )
             ft_put_arg(*format, args, &counter);
-            else
-            write(1,'%',1);
             format++;
         }
     }
@@ -55,6 +51,6 @@ int ft_printf(const char *format, ...)
 }
 int main()
 {
-    int c =ft_printf("this is life %d %s\n",22,ghita);
-    printf("%d",c);
+    int c = ft_printf("this is life %d %s\n", 22, ghita);
+    printf("%d", c);
 }

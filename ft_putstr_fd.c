@@ -2,12 +2,12 @@ ft_putstr_fd(char *str,int fd,int *counter)
 {
     	int	i;
 
-	if (!s)
+	if (!str)
 		return ;
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		write(fd, &s[i], 1);
+		write(fd, &str[i], 1);
 		i++;
 	}
     (*counter)+=i;
