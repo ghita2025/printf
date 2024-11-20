@@ -19,11 +19,40 @@
 // }
 
 #include <stdio.h>
-
+#include <limits.h>
+#include "libftprintf.h"
 int main()
 {
-    int a =0x1010;
-    //printf("%d\t%i\t%u\t%c\t%s\t%u\t%x\t%X\n",a, a, -a ,a-67153300, "ghita", &a, a, a);
-printf("%u",a);
+   int len;
+   int len2;
+   unsigned int ui;
+   void *addr;
+
+len = printf("lets try to printf a simple sentence .\n");
+len2= ft_printf("lets try to printf a simple sentence .\n");
+ui = (unsigned int)INT_MAX +1024;
+addr = (void *)0x7ffe637541f0;
+printf("length : [ %d, %i]\n", len , len);
+ft_printf("length : [ %d, %i]\n", len , len);
+printf("negative : [ %d ]\n",-762534);
+ft_printf("negative : [ %d ]\n",-762534);
+printf("unsigned : [ %u ]\n",ui);
+ft_printf("unsigned : [ %u ]\n",ui);
+printf("unsigned hexadecimal : [%x  , %X ]\n",ui,ui);
+ft_printf("unsigned hexadecimal : [%x  , %X ]\n",ui,ui);
+printf(" caracter : [ %c ]\n",'H');
+ft_printf(" caracter : [ %c ]\n",'H');
+
+printf(" string  : [ %s ]\n"," i am a string ");
+ft_printf(" string  : [ %s ]\n"," i am a string ");
+
+printf(" adress : [ %p ]\n",addr);
+ft_printf(" adress : [ %p ]\n",addr);
+len = printf("percent:[%%]\n");
+len2 =ft_printf("percent:[%%]\n");
+printf("len:[%d]\n",len);
+ft_printf("len:[%d]\n",len2);
+
+//printf(" unknown :[%r]")
     return 0;
 }
