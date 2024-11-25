@@ -6,62 +6,117 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:34:30 by gstitou           #+#    #+#             */
-/*   Updated: 2024/11/20 16:08:56 by gstitou          ###   ########.fr       */
+/*   Updated: 2024/11/25 15:12:37 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-int is_percent(char c)
+#include "ft_printf.h"
+
+int	is_percent(char c)
 {
-    return (c == '%');
+	return (c == '%');
 }
-void print(const char **str, int *counter)
+
+int	is_format(char c)
 {
-    while (**str && !is_percent(**str))
-    {
-        (*counter) += write(1, *str, 1);
+	return (c == 'd' || c == 'i' || c == 'p' || c == 'u' || c == 'x' || c == 'X'
+		|| c == 's' || c == 'c');
+}
+
+void	print(const char **str, int *counter)
+{
+	while (**str && !is_percent(**str))
+	{
+		*counter += write(1, *str, 1);
         (*str)++;
-    }
+	}
 }
 
-int ft_printf(const char *format, ...)
+void	handle_percent(const char **format, va_list args, int *counter)
 {
-    int counter;
-    va_list args;
-
-    if (!format)
-        return (0);
-
-    va_start(args, format);
-    counter = 0;
-    while (*format)
-    {
-        if (!is_percent(*format))
-            print(&format, &counter);
-        if (is_percent(*format))
-        {
-            format++;
-            ft_put_arg(*format, args, &counter);
-            format++;
-        }
-    }
-    va_end(args);
-    return (counter);
+	(*format)++;
+	if (!**format)
+	{
+		write(1, "%%", 1);
+		*counter = -1;
+		return ;
+	}
+	if (is_format(**format))
+		ft_put_arg(**format, args, counter);
+	else
+		*counter += write(1, "%%", 1);
+	(*format)++;
 }
-// int main()
+
+int	ft_printf(const char *format, ...)
+{
+	int		counter;
+	va_list	args;
+
+	if (!format)
+		return (-1);
+	va_start(args, format);
+	counter = 0;
+	while (*format)
+	{
+		print(&format, &counter);
+		if (is_percent(*format))
+			handle_percent(&format, args, &counter);
+	}
+	va_end(args);
+	return (counter);
+}
+
+// // #include "ft_printf.h"
+
+// int	is_percent(char c)
 // {
+// 	return (c == '%');
+// }
 
-// // char f;
-// // char *p = &f;
+// int is_format(char c)
+// {
+//     return( c == 'd' || c == 'i' || c == 'p'
+// 				|| c == 'u' || c == 'x' || c == 'X'
+// 				|| c == 's' || c == '%');
+// }
 
-// //   int c= printf("%p\n",p);
-// //   printf("%d   \n",c);
-// //     int b=ft_printf("%p\n",p);
-// //     printf("%d   \n",b);
-// //      printf("%d\n",printf("%X\n",1010));
-// //      printf("%d\n",ft_printf("%X\n",1010));
+// void	print(const char **str, int *counter)
+// {
+// 	while (**str && !is_percent(**str))
+// 	{
+// 		(*counter) += write(1, *str, 1);
+// 		(*str)++;
+// 	}
+// }
 
-// printf("%d \n",0);
-// ft_printf("%d",0);
+// int	ft_printf(const char *format, ...)
+// {
+// 	int		counter;
+// 	va_list	args;
 
+// 	if (!format)
+// 		return (0);
+// 	va_start(args, format);
+// 	counter = 0;
+// 	while (*format)
+// 	{
+//         print(&format, &counter);
+// 		if (is_percent(*format))
+//         {
+// 			format++;
+//             if(!*format)
+//             {
+//             counter += write(1, "%%", 1);
+//             return (counter);
+//             }
+// 			if (is_format(*format))
+// 				ft_put_arg(*format, args, &counter);
+// 			else
+// 				counter += write(1, "%%", 1);
+//                 format++;
+//         }
+// 	}
+// 	va_end(args);
+// 	return (counter);
 // }

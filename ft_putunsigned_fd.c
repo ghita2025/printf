@@ -6,23 +6,26 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:50:08 by gstitou           #+#    #+#             */
-/*   Updated: 2024/11/20 14:05:25 by gstitou          ###   ########.fr       */
+/*   Updated: 2024/11/25 08:45:14 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void ft_putunsigned_fd(va_list args, int fd, int *counter)
+void	ft_putunsigned_fd(va_list args, int fd, int *counter)
 {
-	unsigned int num = va_arg(args, unsigned int);
-	char buffer[10];
-	int i = 0;
+	unsigned int	num;
+	char			buffer[10];
+	int				i;
+	char			c;
 
+	num = va_arg(args, unsigned int);
+	i = 0;
 	if (num == 0)
 	{
-		char c = '0';
+		c = '0';
 		(*counter) += write(fd, &c, 1);
-		return;
+		return ;
 	}
 	while (num > 0)
 	{

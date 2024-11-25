@@ -6,13 +6,13 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:18:43 by gstitou           #+#    #+#             */
-/*   Updated: 2024/11/20 10:18:44 by gstitou          ###   ########.fr       */
+/*   Updated: 2024/11/25 09:44:43 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd , int *counter)
+void	ft_putchar_fd(char c, int fd, int *counter)
 {
-	(*counter)+=write(fd, &c, 1);
+	(*counter) += write(fd, &c, 1);
 }
