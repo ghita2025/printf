@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:59:04 by gstitou           #+#    #+#             */
-/*   Updated: 2024/11/25 14:29:01 by gstitou          ###   ########.fr       */
+/*   Updated: 2024/12/04 20:41:25 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void	print_adress(va_list args, int *counter)
 		(*counter) += write(1, "0x", 2);
 		ft_convert_to_hex((unsigned long)ptr, 'x', counter);
 	}
-	
 }
 
 void	ft_put_arg(char sep, va_list args, int *counter)
 {
 	if (sep == '%')
-		(*counter) += write(1, "%%", 1);
+		(*counter) += write(1, "%", 1);
 	else if (sep == 'd' || sep == 'i')
 		ft_putnbr_fd(va_arg(args, int), 1, counter);
 	else if (sep == 'c')

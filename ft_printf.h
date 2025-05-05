@@ -6,14 +6,14 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:45:09 by gstitou           #+#    #+#             */
-/*   Updated: 2024/11/25 09:45:10 by gstitou          ###   ########.fr       */
+/*   Updated: 2024/12/04 20:45:13 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
 
 void	ft_putstr_fd(va_list args, int fd, int *counter);
 void	ft_putnbr_fd(int num, int fd, int *counter);

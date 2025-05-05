@@ -13,13 +13,10 @@ SRC = ft_convert_To_Hex.c \
 
 OBJ = $(SRC:.c=.o)
 
-ALL: $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ)
 		ar rcs $(NAME) $(OBJ)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 		rm -f $(OBJ)
